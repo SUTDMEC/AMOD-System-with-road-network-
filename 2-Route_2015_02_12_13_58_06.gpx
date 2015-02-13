@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<gpx
+version="1.1" creator="www.GPS-Tracks.com" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://www.topografix.com/GPX/1/1" 
+xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+<name><![CDATA[Downloader: 2015-02-13T04:18:48 # 100128 # gpstracks # 103.24.77.51]]></name>
+<desc><![CDATA[Route_2015-02-12 13:58:06]]></desc>
+<author>
+<name>Christian Steiner</name>
+<email id="info" domain="GPS-Tracks.com"/>
+<link href="http://www.GPS-Tracks.com/2.html">
+<text>GPS-Tracks.com</text>
+</link>
+</author>
+<copyright author="GEO-Tracks GmbH, Seestrasse 5, CH-6330 Cham">
+<license>http://www.GPS-Tracks.com</license>
+</copyright>
+<bounds minlat="1.340278" minlon="103.963718" maxlat="1.342197" maxlon="103.965134" />
+</metadata>
+
+<trk>
+<name>2-0 Route_2015_02_12_13_58_06</name>
+<extensions>
+<line xmlns="http://www.topografix.com/GPX/gpx_style/0/2">
+<color>ff00ff</color>
+</line>
+<gpxx:TrackExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensions/v3/GpxExtensionsv3.xsd"><gpxx:DisplayColor>Magenta</gpxx:DisplayColor></gpxx:TrackExtension>
+</extensions>
+<trkseg>
+<trkpt lat="1.341963" lon="103.963777">
+<time>2015-02-12T13:48:25</time>
+</trkpt>
+<trkpt lat="1.342004" lon="103.963757">
+<time>2015-02-12T13:48:30</time>
+</trkpt>
+<trkpt lat="1.342103" lon="103.963811">
+<time>2015-02-12T13:48:36</time>
+</trkpt>
+<trkpt lat="1.342146" lon="103.963825">
+<time>2015-02-12T13:48:40</time>
+</trkpt>
+<trkpt lat="1.342177" lon="103.963827">
+<time>2015-02-12T13:48:42</time>
+</trkpt>
+<trkpt lat="1.342197" lon="103.963823">
+<time>2015-02-12T13:48:44</time>
+</trkpt>
+</trkseg>
+</trk>
+<trk>
+<name>2-1 Route_2015_02_12_13_58_06</name>
+<extensions>
+<line xmlns="http://www.topografix.com/GPX/gpx_style/0/2">
+<color>ff00ff</color>
+</line>
+<gpxx:TrackExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensions/v3/GpxExtensionsv3.xsd"><gpxx:DisplayColor>Magenta</gpxx:DisplayColor></gpxx:TrackExtension>
+</extensions>
+<trkseg>
+<trkpt lat="1.341978" lon="103.964224">
+<time>2015-02-12T14:49:55</time>
+</trkpt>
+<trkpt lat="1.342" lon="103.964035">
+<time>2015-02-12T14:50:02</time>
+</trkpt>
+<trkpt lat="1.342003" lon="103.964216">
+<time>2015-02-12T14:50:04</time>
+</trkpt>
+<trkpt lat="1.342108" lon="103.9642">
+<time>2015-02-12T14:50:08</time>
+</trkpt>
+</trkseg>
+</trk>
+<trk>
+<name>2-2 Route_2015_02_12_13_58_06</name>
+<extensions>
+<line xmlns="http://www.topografix.com/GPX/gpx_style/0/2">
+<color>ff00ff</color>
+</line>
+<gpxx:TrackExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensions/v3/GpxExtensionsv3.xsd"><gpxx:DisplayColor>Magenta</gpxx:DisplayColor></gpxx:TrackExtension>
+</extensions>
+<trkseg>
+<trkpt lat="1.341639" lon="103.963812">
+<time>2015-02-12T14:51:23</time>
+</trkpt>
+<trkpt lat="1.341631" lon="103.963848">
+<time>2015-02-12T14:51:31</time>
+</trkpt>
+<trkpt lat="1.341767" lon="103.963887">
+<time>2015-02-12T14:51:54</time>
+</trkpt>
+<trkpt lat="1.34179" lon="103.963876">
+<time>2015-02-12T14:51:58</time>
+</trkpt>
+<trkpt lat="1.341714" lon="103.963718">
+<time>2015-02-12T14:52:24</time>
+</trkpt>
+<trkpt lat="1.341686" lon="103.963798">
+<time>2015-02-12T14:52:29</time>
+</trkpt>
+<trkpt lat="1.341548" lon="103.964086">
+<time>2015-02-12T14:52:52</time>
+</trkpt>
+<trkpt lat="1.341465" lon="103.964194">
+<time>2015-02-12T14:53:03</time>
+</trkpt>
+<trkpt lat="1.341416" lon="103.964374">
+<time>2015-02-12T14:53:21</time>
+</trkpt>
+<trkpt lat="1.341256" lon="103.964605">
+<time>2015-02-12T14:53:46</time>
+</trkpt>
+<trkpt lat="1.341081" lon="103.96458">
+<time>2015-02-12T14:54:02</time>
+</trkpt>
+<trkpt lat="1.34085" lon="103.964588">
+<time>2015-02-12T14:54:17</time>
+</trkpt>
+<trkpt lat="1.340603" lon="103.964646">
+<time>2015-02-12T14:54:39</time>
+</trkpt>
+<trkpt lat="1.340402" lon="103.964958">
+<time>2015-02-12T14:55:12</time>
+</trkpt>
+<trkpt lat="1.340278" lon="103.965134">
+<time>2015-02-12T14:55:37</time>
+</trkpt>
+<trkpt lat="1.340304" lon="103.965066">
+<time>2015-02-12T14:55:44</time>
+</trkpt>
+<trkpt lat="1.340347" lon="103.964872">
+<time>2015-02-12T14:55:59</time>
+</trkpt>
+<trkpt lat="1.340487" lon="103.964666">
+<time>2015-02-12T14:56:23</time>
+</trkpt>
+<trkpt lat="1.340589" lon="103.964494">
+<time>2015-02-12T14:56:39</time>
+</trkpt>
+<trkpt lat="1.340723" lon="103.964464">
+<time>2015-02-12T14:56:51</time>
+</trkpt>
+<trkpt lat="1.340849" lon="103.96451">
+<time>2015-02-12T14:57:02</time>
+</trkpt>
+<trkpt lat="1.341118" lon="103.964524">
+<time>2015-02-12T14:57:22</time>
+</trkpt>
+<trkpt lat="1.34125" lon="103.96448">
+<time>2015-02-12T14:57:34</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>
