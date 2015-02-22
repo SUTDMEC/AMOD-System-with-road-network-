@@ -1,10 +1,10 @@
-function [ waiting_time,waited_time, updated_vehicle_availability_map, time ] = vehicle_assignment(start_node,vehicle_availability_map)
+function [ waiting_time,waited_time, updated_vehicle_availability_map, time ] = vehicle_assignment(start_node,connectivity_matrix, vehicle_availability_map)
 
 %%   Detailed explanation goes here
 
 %   Input: 
 %   vehicle_availability_map (position of each vehicle in the road network
-%   and its status (available/occupied/booked/down); road represented as
+%   and its states (available/occupied/booked/down); road represented as
 %   nodes every 2 meters along the road; map has n nodes; at each node, 1=
 %   has a scooter, 0 = does not have a scooter
 
@@ -17,7 +17,8 @@ function [ waiting_time,waited_time, updated_vehicle_availability_map, time ] = 
 %   are not matched, reiterate till exceeds tolerance time,waited_time =+1
 %   At each time iteration, a "booked" scooter has a probability to change its status to
 %   "available" as a customer may cancel the order while waiting for the
-%   scooter to arrive 
+%   scooter to arrive; if not cancel but leave, change from "booked" to
+%   "available" upon arrival
 %   
 %   waiting_time (the time it takes to wait for the scooter to arrive when
 %   you've already got a scooter matched to you and is on its way)
@@ -28,6 +29,11 @@ function [ waiting_time,waited_time, updated_vehicle_availability_map, time ] = 
 
 %   update vehicle_availability_map after each iteration, update the status
 %   of each vehicle and its position on the map (node)
+
+%   assumptions: person stays at the same place while waiting for the
+%   scooter to arrive 
+
+%   * lost demand definition 
 
 %%  Other parameters
 

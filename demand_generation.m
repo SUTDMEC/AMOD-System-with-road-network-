@@ -2,7 +2,7 @@ function [ start_node ] = demand_generation(connectivity_matrix,time,day,vacatio
 
 %% Summary of this function goes here
 % Input: 
-% connectivity matrix (representing croad network),
+% connectivity matrix (representing road network),
 % time (time of day), 
 % day (day of week), 
 % vacation (binary 1=vacation; 0=term time)
@@ -11,6 +11,8 @@ function [ start_node ] = demand_generation(connectivity_matrix,time,day,vacatio
 
 %%
 % Data to be included with study of SUTD, for now fictitious demand 
+
+
 
 
 

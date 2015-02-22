@@ -1,0 +1,102 @@
+% Written by Wei Wei and Nishaan 
+% Description: free floating scooter sharing (efloater) 
+% Main modules included:
+% demand_generation.m 
+% destination_generation.m
+% vehicle_assignment.m 
+% travel_time_calculation.m
+% fleet_rebalancing.m
+
+clc; clear;
+
+% initialization 
+num_nodes = size(connectivity_matrix,1);
+vehicle_availability_map = zeros(num_nodes,1);
+total_num_scooter = 10;     
+
+datetime.setDefaultFormats('default','yyyy-MM-dd hh:mm:ss'); 
+yyyy = 2015;
+MM = 3;
+dd = 1;
+datestr(now,formatOut)
+
+
+%run simulation continuously for 31 days (1 month)
+for  iteration = 1:1:31 % day1 to day31
+     
+    t = datetime(yyyy,MM,dd,3,0,0); % every day system restarts at 3 a.m.
+    time = [t.Hour, t.Minute, t.Second]; 
+    formatOut = 8;
+    sprintf('%MM-%dd-%yyyy',)
+    datestr('%MM-%yyyy-%dd',formatOut)
+    vehicle_availability_map = vehicle_location_initialization( vehicle_availability_map, varargin); %Initialization of scooters at beginning of day
+    [ start_node ] = demand_generation(connectivity_matrix,time,day,vacation);
+    
+    total_time_cost (1,iii)  = (size/10) * (size/10);
+    %Autonomous model trip time
+    total_time_cost (2,iii)  = 0;
+    %Station model trip time
+    total_time_cost (3,iii) = 0;
+    %Walking time (on a city grid)
+    total_time_cost (4,iii) = 0;
+    %Walking time (on a euclidien distance) aka taking short cuts
+    total_time_cost (5,iii) = 0;
+    
+    %run a monte carlo simulation given number of trips
+    number_trips = 10000;
+    for trip_count = 1:number_trips;
+        %random start and end location on the map
+        %assumption: demand for the start and end of the trip in uniform
+        %accoess the grid (homogenous demand)
+        start_coordinate = randi([1,map_size(1)],1,2); % matrix of size 1X2, filled with integers between 1 and map_size(1) 
+        end_coordinate = randi([1,map_size(1)   ],1,2);
+        
+        %Calculate the time for the trip
+        [autonomous_time_cost, avaliable_bike_map ]= autonomous_model_cost(map_size, avaliable_bike_map,start_coordinate, end_coordinate);
+        [traditional_time_cost, bikes_at_station, empty_slots_at_station ] = traditional_model_cost(map_size, bikes_at_station, empty_slots_at_station,start_coordinate, end_coordinate);
+        only_walking_time_cost = walking_cost(start_coordinate, end_coordinate);
+        only_walking_euclidien_time_cost = walking_cost_euclidien (start_coordinate, end_coordinate);
+        
+        %tally the total costs for all the trips
+        total_time_cost (2,iii) = total_time_cost(2,iii) + autonomous_time_cost;
+        total_time_cost (3,iii) = total_time_cost (3,iii) + traditional_time_cost;    
+        total_time_cost (4,iii) = total_time_cost (4,iii) + only_walking_time_cost;    
+        total_time_cost (5,iii) = total_time_cost (5,iii) + only_walking_euclidien_time_cost;    
+
+    end
+    iii= iii+1;
+    
+    dd = dd+1;
+end
+
+%average the trip time
+total_time_cost(2,:)= total_time_cost(2,:)/number_trips;
+total_time_cost(3,:)= total_time_cost(3,:)/number_trips;
+total_time_cost(4,:)= total_time_cost(4,:)/number_trips;
+total_time_cost(5,:)= total_time_cost(5,:)/number_trips;
+
+%plot the results
+figure(1);
+plot (total_time_cost(1,:), total_time_cost(2,:),'b')
+hold;
+plot (total_time_cost(1,:), total_time_cost(3,:),'r')
+%plot (total_time_cost(1,:), total_time_cost(4,:),'k')
+plot (total_time_cost(1,:), total_time_cost(5,:),'-.g')
+
+legend('Autonomous Model','Traditional Station Model', 'Walking Directly');
+%legend('Autonomous Model','Traditional Station Model', 'Walking Streets', 'Walking Euclidien');
+title('Average Trip Time vs Systam Coverage Area')
+xlabel('Bike System Coverage Area (km^2)');
+ylabel('Average trip time (minutes)');
+
+figure(2);
+semilogx(total_time_cost(1,:), total_time_cost(2,:),'b')
+hold;
+semilogx (total_time_cost(1,:), total_time_cost(3,:),'r')
+%semilogx(total_time_cost(1,:), total_time_cost(4,:),'k')
+semilogx (total_time_cost(1,:), total_time_cost(5,:),'-.g')
+legend('Autonomous Model','Traditional Station Model', 'Walking Directly');
+%legend('Autonomous Model','Traditional Station Model', 'Walking Streets', 'Walking Euclidien');
+title('Average Trip Time vs Systam Coverage Area')
+xlabel('Bike System Coverage Area (km^2)');
+ylabel('Average trip time (minutes)');
