@@ -1,12 +1,13 @@
-function [ waiting_time,waited_time, updated_vehicle_availability_map, time ] = vehicle_assignment(start_node,connectivity_matrix, vehicle_availability_map)
+%function [ waiting_time,waited_time, updated_vehicle_availability_map, time ] = vehicle_assignment(start_node,connectivity_matrix, vehicle_availability_map)
+function [ waiting_time,waited_time, updated_vehicle_availability_map, time ] = vehicle_assignment(origin_coordinate, target_coordinate, vehicle_availability_map)
 
 %%   Detailed explanation goes here
 
 %   Input: 
 %   vehicle_availability_map (position of each vehicle in the road network
 %   and its states (available/occupied/booked/down); road represented as
-%   nodes every 2 meters along the road; map has n nodes; at each node, 1=
-%   has a scooter, 0 = does not have a scooter
+%   nodes every 10 meters along the road; map has n nodes; at each node, 0 
+%   = does not have a scooter, o/w has scooter 
 
 %   Output: 
 %   matches demand to the nearest "available" efloater and provide
@@ -40,7 +41,26 @@ function [ waiting_time,waited_time, updated_vehicle_availability_map, time ] = 
 %   probability distribution of scooter changing from "available", "occupied", "booked" to "down" 
 %   distribution of customer tolerance time 
 
+scooter_auto_speed  = 4*1000/3600; %m/s = 4 km/hr 
+possible_movements = [-1 0; % go up
+         0 -1;   % go left
+         1 0; % go down
+         0 1];% go right
+map_size = size(vehicle_availability_map);
+%heuristic used for A* is manhattan because bike travels on city block
+heuristic = generate_manhattan_huristic (map_size, end_coordinate);
+        
+%%  Scooter states: A - Available, O - Occupied, B - Booked, D - Down 
+%find the nearest scooter that is available "A"
+closest_vehicle_position = find_closest_vehicle(vehicle_availability_map, possible_movements,target_coordinate,heuristic);
 
+%assign any "A" scooter at closest_vehicle_position for this request 
+customer_tolerance_time = 5; %minutes
+waited_time = 0;
 
+while waited_time <= customer_tolerance_time
+    waited_time = waited_time + 1;
+    if ....
 end
-
+    
+        
