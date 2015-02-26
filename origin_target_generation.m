@@ -1,7 +1,7 @@
 %function [ start_node ] = demand_generation(connectivity_matrix,time,day)
 %function [ map ] = demand_generation(map,time,day)
 
-function [ origin_map, origin_target_pair, updated_total_map ] = origin_target_generation(map,vehicle_availability_map)
+function [ origin_map, origin_target_pair, updated_total_map ] = origin_target_generation(map)
 
 %% Summary of this function goes here
 % Input: 
@@ -37,11 +37,13 @@ for i = 1:size(map,1)
         %nodes 
         
         for k = 1:origin_map(i,j)
-            t = unidrnd(size(map,1),1,2); %assume discrete unifrom distribution 
+            t = unidrnd(size(map,1),1,2); %assume discrete unifrom distribution to choose one target 
             while isequal(t,[i,j])
                 t = unidrnd(size(map,1),1,2); %ensure origin and target different 
             end
-            origin_target_pair(1,iii)= [[i,j],t]; %collects all origin_target pairs
+            origin_target_pair(iii,:)= [[i,j],t]; %collects all origin_target pairs 
+            % in the format of: [i,j,t(1),t(2)]
+                               %[i',j',t'(1),t'(2)]                          
             iii = iii + 1;
         end 
         

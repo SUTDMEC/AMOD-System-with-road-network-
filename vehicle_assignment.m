@@ -1,7 +1,7 @@
 %function [ waiting_time,waited_time, updated_vehicle_availability_map, time ] = vehicle_assignment(start_node,connectivity_matrix, vehicle_availability_map)
-function [ waiting_time,waited_time, updated_vehicle_availability_map, time ] = vehicle_assignment(origin_coordinate, target_coordinate, vehicle_availability_map)
+function [ waiting_time,waited_time, vehicle_availability_map] = vehicle_assignment(origin_coordinate, target_coordinate, vehicle_availability_map)
 
-%%   Detailed explanation goes here
+%% vehicle assignment for a single individual request
 
 %   Input: 
 %   vehicle_availability_map (position of each vehicle in the road network
@@ -47,20 +47,39 @@ possible_movements = [-1 0; % go up
          1 0; % go down
          0 1];% go right
 map_size = size(vehicle_availability_map);
+grid_size = 10; %m
+customer_tolerance_time = 5; %minutes, to be changed to a distribution based on survey 
+
 %heuristic used for A* is manhattan because bike travels on city block
-heuristic = generate_manhattan_huristic (map_size, end_coordinate);
+heuristic = generate_manhattan_huristic (map_size, target_coordinate);
         
 %%  Scooter states: A - Available, O - Occupied, B - Booked, D - Down 
-%find the nearest scooter that is available "A"
-closest_vehicle_position = find_closest_vehicle(vehicle_availability_map, possible_movements,target_coordinate,heuristic);
+%find the nearest scooter that is available "A" [column,row]
+closest_vehicle_position = find_closest_vehicle(vehicle_availability_map, possible_movements,target_coordinate,heuristic)
+closest_vehicle_position = [closest_vehicle_position(2),closest_vehicle_position(1)]
 
-%assign any "A" scooter at closest_vehicle_position for this request 
-customer_tolerance_time = 5; %minutes
+%calculate a heuristic of customer waiting time for the scooter to arrive
+grids_traveled_autonomous = pdist2(closest_vehicle_position, origin_coordinate, 'cityblock');
+waiting_time = grids_traveled_autonomous* grid_size /scooter_auto_speed
 waited_time = 0;
 
-while waited_time <= customer_tolerance_time
-    waited_time = waited_time + 1;
-    if ....
+if waited_time <= customer_tolerance_time
+    if waiting_time > customer_tolerance_time
+        %customer does not leave the queue, but waits at the next time step to see whether the updated vehicle_availability_map has a nearer bike for him 
+        waited_time = waited_time+1; %waited_time passes 1 
+        waiting_time = waiting_time + waited_time;
+    else
+        %assign any "A" scooter at closest_vehicle_position for this request,
+        index = find(vehicle_availability_map(closest_vehicle_position(1), closest_vehicle_position(2),:)=='A',1); %index of the first scooter in the closest position that is 'A'
+        vehicle_availability_map(closest_vehicle_position(1), closest_vehicle_position(2),index) = 'B'; %change the state of the scooter to "B"     
+        waited_time = waited_time+1;
+    end
+else
+    %customer leaves the queue (represented by origin_map)
+    origin_map(origin_coordinate(1),origin_coordinate(2)) = origin_map(origin_coordinate(1),origin_coordinate(2))-1;
+    waiting_time = 10^8;
+    waited_time = 10^8; %inf
 end
     
+
         

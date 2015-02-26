@@ -1,4 +1,4 @@
-function [closest_vehicle_position] = find_closest_vehicle(vehicle_availability_map, possible_movements, present_location, heuristic,time)
+function [closest_vehicle_position] = find_closest_vehicle(vehicle_availability_map, possible_movements, present_location, heuristic)
 
 %find the node with the nearest scooter(s) that is available "A", note that
 %there might be many available scooters at the closest_vehicle_position
@@ -36,7 +36,7 @@ object_found = [];
 
 %If an available bike is found at present location
 type = 'A';
-C = vehicle_availability_map(present_location(1), present_location(2),:,time); 
+C = vehicle_availability_map(present_location(1), present_location(2),:,); 
 A = [C(1),C(2)];
 is_type_in_A = any(strfind(A,type));
 
@@ -71,7 +71,7 @@ count = 0;
             checked(y,x) = count;
             count = count + 1;
             
-            C = vehicle_availability_map(x, y,:,time); 
+            C = vehicle_availability_map(x, y,:); 
             A = [C(1),C(2)];
             is_type_in_A = any(strfind(A,type));
             %if an object is found
@@ -85,12 +85,12 @@ count = 0;
                     x2 = x + possible_movements(iii,2);
 
                     if (y2> 0 && y2 < size(vehicle_availability_map,1)+1 && x2>0 && x2 < size(vehicle_availability_map,2)+1)
-                        if (checked(y2, x2) == 0 && vehicle_availability_map(y2,x2,:,time)> -1)
+                        if (checked(y2, x2) == 0 && vehicle_availability_map(y2,x2)> -1)
                             total_cost = cost + heuristic(y2,x2);
                             searched_stack = [searched_stack ; total_cost, cost, y2, x2];
                             checked(y2,x2) = count;
                              
-                            C = vehicle_availability_map(x2,y2,:,time); 
+                            C = vehicle_availability_map(x2, y2,:); 
                             A = [C(1),C(2)];
                             is_type_in_A = any(strfind(A,type));
                             %if an available vehicle is found
