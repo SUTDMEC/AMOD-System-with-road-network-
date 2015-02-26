@@ -1,5 +1,5 @@
 %function [ waiting_time,waited_time, updated_vehicle_availability_map, time ] = vehicle_assignment(start_node,connectivity_matrix, vehicle_availability_map)
-function [ waiting_time,waited_time, vehicle_availability_map] = vehicle_assignment(origin_coordinate, target_coordinate, vehicle_availability_map)
+function [ waiting_time,waited_time, vehicle_availability_map,index] = vehicle_assignment(origin_coordinate, target_coordinate, vehicle_availability_map,time)
 
 %% vehicle assignment for a single individual request
 
@@ -55,12 +55,12 @@ heuristic = generate_manhattan_huristic (map_size, target_coordinate);
         
 %%  Scooter states: A - Available, O - Occupied, B - Booked, D - Down 
 %find the nearest scooter that is available "A" [column,row]
-closest_vehicle_position = find_closest_vehicle(vehicle_availability_map, possible_movements,target_coordinate,heuristic)
+closest_vehicle_position = find_closest_vehicle(vehicle_availability_map, possible_movements,target_coordinate,heuristic,time);
 closest_vehicle_position = [closest_vehicle_position(2),closest_vehicle_position(1)]
 
 %calculate a heuristic of customer waiting time for the scooter to arrive
 grids_traveled_autonomous = pdist2(closest_vehicle_position, origin_coordinate, 'cityblock');
-waiting_time = grids_traveled_autonomous* grid_size /scooter_auto_speed
+waiting_time = grids_traveled_autonomous* grid_size /scooter_auto_speed;
 waited_time = 0;
 
 if waited_time <= customer_tolerance_time
@@ -70,15 +70,17 @@ if waited_time <= customer_tolerance_time
         waiting_time = waiting_time + waited_time;
     else
         %assign any "A" scooter at closest_vehicle_position for this request,
-        index = find(vehicle_availability_map(closest_vehicle_position(1), closest_vehicle_position(2),:)=='A',1); %index of the first scooter in the closest position that is 'A'
-        vehicle_availability_map(closest_vehicle_position(1), closest_vehicle_position(2),index) = 'B'; %change the state of the scooter to "B"     
-        waited_time = waited_time+1;
+        index = find(vehicle_availability_map(closest_vehicle_position(1), closest_vehicle_position(2),:,time)=='A',1); %index of the first scooter in the closest position that is 'A'
+        vehicle_availability_map(closest_vehicle_position(1), closest_vehicle_position(2),index,time) = 'B'; %change the state of the scooter to "B"     
+        vehicle_availability_map(closest_vehicle_position(1), closest_vehicle_position(2),index,time+waiting_time) = 'O'; %change the state of the scooter to "O at time+waiting_time
+        %waited_time = waited_time+1;
+        
     end
 else
     %customer leaves the queue (represented by origin_map)
     origin_map(origin_coordinate(1),origin_coordinate(2)) = origin_map(origin_coordinate(1),origin_coordinate(2))-1;
-    waiting_time = 10^8;
-    waited_time = 10^8; %inf
+    waiting_time = 0;
+    waited_time = 0; 
 end
     
 

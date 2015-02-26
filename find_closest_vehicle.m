@@ -85,7 +85,7 @@ count = 0;
                     x2 = x + possible_movements(iii,2);
 
                     if (y2> 0 && y2 < size(vehicle_availability_map,1)+1 && x2>0 && x2 < size(vehicle_availability_map,2)+1)
-                        if (checked(y2, x2) == 0 && vehicle_availability_map(y2,x2,:,time)> -1)
+                        if (checked(y2, x2) == 0 && size(vehicle_availability_map(y2,x2,:,time),3)> -1)
                             total_cost = cost + heuristic(y2,x2);
                             searched_stack = [searched_stack ; total_cost, cost, y2, x2];
                             checked(y2,x2) = count;

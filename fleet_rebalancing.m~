@@ -50,10 +50,9 @@ for i = 1:num_of_blocks
         %block;     
         
         %to decide which vehicle to push to or pull from that block, choose
-        %the 'A' vehicle nearest to block i's center, e.g. (2,2) for block 1 
+        %the vehicle nearest to block i's center, e.g. (2,2) for block 1 
         
-        %generate a virtual passenger at block i's center node, moves the
-        %chosen vehicle towards that direction, but still with state 'A'
+        %generate a virtual passenger at block i's center node (s) 
         
     end
 end

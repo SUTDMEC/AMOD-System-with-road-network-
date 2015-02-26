@@ -61,7 +61,8 @@ for  iteration = 1:1:31 % day1 to day31
             target_coordinate = origin_target_pair(iii,3:4);
             %calculate waiting_time for each request and update
             %vehicle_availability_map
-            [waiting_time,vehicle_availability_map] = vehicle_assignment(origin_coordinate, target_coordinate, vehicle_availability_map); 
+            [waiting_time,vehicle_availability_map,index] = vehicle_assignment(origin_coordinate, target_coordinate, vehicle_availability_map,time); 
+            total_time = total_time_calculation( origin_target_pair, vehicle_availability_map,index,waiting_time,time);
             
         
         end

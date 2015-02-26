@@ -15,11 +15,11 @@ function [ vehicle_availability_map ] = vehicle_location_initialization( vehicle
 % in the future based on survey result 
 
 % 4-dimensional: row, column (position), state of each vehicle, time
-vehicle_availability_map(1,1,1:2,0) = ['A','A']; %A = Available
-vehicle_availability_map(5,5,1:2,0) = ['A','A'];
-vehicle_availability_map(1,5,1:2,0) = ['A','A'];
-vehicle_availability_map(5,1,1:2,0) = ['A','A'];
-vehicle_availability_map(3,3,1:2,0) = ['A','A']; % 2 vehicles, 2 levels
+vehicle_availability_map(1,1,1:2,1) = ['A','A']; %A = Available
+vehicle_availability_map(4,4,1:2,1) = ['A','A'];
+vehicle_availability_map(1,4,1:2,1) = ['A','A'];
+vehicle_availability_map(4,1,1:2,1) = ['A','A'];
+vehicle_availability_map(2,2,1:2,1) = ['A','A']; % 2 vehicles, 2 levels
 
 end
 
